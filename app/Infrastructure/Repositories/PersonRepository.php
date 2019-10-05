@@ -4,6 +4,7 @@ namespace App\Infrastructure\Repositories;
 
 use App\Domain\Repositories\IPersonRepository;
 use Jenssegers\Mongodb\Eloquent\Model;
+use Jenssegers\Mongodb\Relations\EmbedsMany;
 
 class PersonRepository extends Model implements IPersonRepository
 {
@@ -11,11 +12,21 @@ class PersonRepository extends Model implements IPersonRepository
 
     protected $fillable = ['name', 'identification', 'jobRole'];
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at', 'date'];
 
-    public function find(int $identification)
+    public function find($identification)
     {
-        // TODO: Implement find() method.
+        $person = $this::where('_id', $identification)
+            ->orWhere('identification', $identification)
+            ->first();
+
+        if(!$person){
+            return response()->json([
+                'message' => 'Não encontrado',
+            ], 404);
+        }
+
+        return $person;
     }
 
     public function refunds()
@@ -25,6 +36,24 @@ class PersonRepository extends Model implements IPersonRepository
 
     public function getAll()
     {
-        return $this::all();
+        $allPersons = $this::all();
+        foreach ($allPersons as $person) {
+            $this->fixDatesEmbededObjects($person);
+            //$person->refunds = $person->refunds; //usado para converter as datas corretamente do banco, dentro de cada subobjeto da lista;
+            // sem a linha acima a data é formatada assim:
+            //                "date": {
+            //                    "$date": {
+            //                        "$numberLong": "1565613200000"
+            //                    }
+            //                },
+        }
+
+
+        return $allPersons;
+    }
+
+    private function fixDatesEmbededObjects(PersonRepository $Person)
+    {
+        $Person->refunds = $Person->refunds;
     }
 }

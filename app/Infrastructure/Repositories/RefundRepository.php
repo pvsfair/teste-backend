@@ -4,6 +4,7 @@ namespace App\Infrastructure\Repositories;
 
 use App\Domain\Repositories\IPersonRepository as IPerson;
 use App\Domain\Repositories\IRefundRepository;
+use App\Infrastructure\Repositories\PersonRepository as Person;
 use Jenssegers\Mongodb\Eloquent\Model;
 
 class RefundRepository extends Model implements IRefundRepository
@@ -17,7 +18,12 @@ class RefundRepository extends Model implements IRefundRepository
 
     public function getAll()
     {
-        // TODO: Implement getAll() method.
+        $refunds = Person::all()->pluck('refunds');
+        $allRefunds = collect();
+        foreach ($refunds as $refund){
+            $allRefunds = $allRefunds->merge($refund);
+        }
+        return $allRefunds->all();
     }
 
     public function create(IPerson $person)

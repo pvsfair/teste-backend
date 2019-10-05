@@ -17,8 +17,13 @@ class PersonController extends Controller
 
     public function index(){
         return $this->person->getAll();
-//        return response()->json(['person'=>'not connected to the DB']);
     }
+
+    public function show($id)
+    {
+        return $this->person->find($id);
+    }
+
     public function add(){
         return response()->json(['refund'=>'not connected to the DB']);
     }

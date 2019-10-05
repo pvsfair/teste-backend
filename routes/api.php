@@ -22,15 +22,9 @@ Route::get('/', function () {
 });
 
 Route::namespace('Person')->group( function (){
-    Route::get('person','PersonController@index');
-    Route::post('person','PersonController@add');
-    Route::delete('person','PersonController@remove');
-    Route::put('person','PersonController@alter');
+    Route::resource('person', 'PersonController');
 });
 
 Route::namespace('Refund')->group( function (){
-    Route::get('refund','RefundController@index');
-    Route::post('refund','RefundController@add');
-    Route::delete('refund','RefundController@remove');
-    Route::put('refund','RefundController@alter');
+    Route::resource('refund', 'RefundController');
 });
