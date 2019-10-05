@@ -175,6 +175,9 @@ return [
         App\Application\Providers\EventServiceProvider::class,
         App\Application\Providers\RouteServiceProvider::class,
 
+        App\Application\Providers\PersonServiceProvider::class,
+        App\Application\Providers\RefundServiceProvider::class,
+
         Jenssegers\Mongodb\MongodbServiceProvider::class,
     ],
 
