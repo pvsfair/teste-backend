@@ -51,6 +51,12 @@ class RefundRepository extends Model implements IRefundRepository
         $refunds = Person::all()->pluck('refunds');
         $allRefunds = collect();
         foreach ($refunds as $refund) {
+            $toSplice = array();
+            foreach ($refund as $k=>$r){
+                if((isset($r->deleted_at) || !empty($r->deleted_at))){
+                    unset($refund[$k]);
+                }
+            }
             $allRefunds = $allRefunds->merge($refund);
         }
         return $allRefunds->all();

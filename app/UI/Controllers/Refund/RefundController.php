@@ -7,6 +7,9 @@ use App\Domain\Repositories\IRefundRepository as RefundRepository;
 use App\UI\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 
 class RefundController extends Controller
@@ -20,9 +23,17 @@ class RefundController extends Controller
         $this->personRepo = $personRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->refundRepo->getAll();
+        $refunds = $this->refundRepo->getAll();
+        return $this->paginate($refunds, 10);
+    }
+
+    public function paginate($items, $perPage = 15, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     public function show($id)
