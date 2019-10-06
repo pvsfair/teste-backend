@@ -26,6 +26,7 @@ Route::namespace('Person')->group( function (){
 });
 
 Route::namespace('Refund')->group( function (){
+    Route::get('refund/report','RefundController@report')->name('refund.report');
     Route::get('refund/{person}','RefundController@show')->name('refund.show');
     Route::post('refund/{person}','RefundController@store')->name('refund.store');
     Route::apiResource('refund', 'RefundController')->except(['store','show']);

@@ -19,7 +19,11 @@ interface IRefundRepository
 
     public function removeRefund($refund);
 
+    public function generateReport(array $all);
+
     public function getStoringValidationData(): array;
 
     public function getUpdatingValidationData(): array;
+
+    public function getReportValidationData(): array;
 }

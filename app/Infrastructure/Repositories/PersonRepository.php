@@ -5,15 +5,18 @@ namespace App\Infrastructure\Repositories;
 use App\Domain\Repositories\IPersonRepository;
 use App\Domain\Repositories\IRefundRepository;
 use Jenssegers\Mongodb\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Jenssegers\Mongodb\Relations\EmbedsMany;
 
 class PersonRepository extends Model implements IPersonRepository
 {
+    use SoftDeletes;
+
     protected $table = "persons";
 
     protected $fillable = ['name', 'identification', 'jobRole'];
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $dateFormat = 'Y-m-d\TH:i:sP';
 
@@ -45,8 +48,8 @@ class PersonRepository extends Model implements IPersonRepository
 
     public function getAll()
     {
-        $allPersons = $this::all();
-        foreach ($allPersons as $person) {
+        $allPersons = $this::paginate(10);
+        foreach ($allPersons->items() as $person) {
             $this->fixDatesEmbededObjects($person);
         }
         return $allPersons;
@@ -69,8 +72,8 @@ class PersonRepository extends Model implements IPersonRepository
     public function updatePerson($person, array $options)
     {
         $person->fill($options);
-        echo $person;
-        echo $person->refunds;
+//        echo $person;
+//        echo $person->refunds;
 
 //        foreach ($options['refunds'] as $refundOpt) {
 //            RefundRepository::storeRefundOn($person, $refundOpt);
