@@ -1,20 +1,17 @@
-+--------+-----------+--------------------------+----------------+----------------------------------------------------+------------+
-|   OK   | Method    | URI                      | Name           | Action                                             | Middleware |
-+--------+-----------+--------------------------+----------------+----------------------------------------------------+------------+
-|   XX   | GET|HEAD  | /                        |                | Closure                                            | web        |
-|   XX   | GET|HEAD  | api                      |                | Closure                                            | api        |
-|   XX   | GET|HEAD  | api/person               | person.index   | App\UI\Controllers\Person\PersonController@index   | api        |
-|        | POST      | api/person               | person.store   | App\UI\Controllers\Person\PersonController@store   | api        |
-|        | GET|HEAD  | api/person/create        | person.create  | App\UI\Controllers\Person\PersonController@create  | api        |
-|   XX   | GET|HEAD  | api/person/{person}      | person.show    | App\UI\Controllers\Person\PersonController@show    | api        |
-|        | PUT|PATCH | api/person/{person}      | person.update  | App\UI\Controllers\Person\PersonController@update  | api        |
-|        | DELETE    | api/person/{person}      | person.destroy | App\UI\Controllers\Person\PersonController@destroy | api        |
-|        | GET|HEAD  | api/person/{person}/edit | person.edit    | App\UI\Controllers\Person\PersonController@edit    | api        |
-|   XX   | GET|HEAD  | api/refund               | refund.index   | App\UI\Controllers\Refund\RefundController@index   | api        |
-|        | POST      | api/refund               | refund.store   | App\UI\Controllers\Refund\RefundController@store   | api        |
-|        | GET|HEAD  | api/refund/create        | refund.create  | App\UI\Controllers\Refund\RefundController@create  | api        |
-|   --   | GET|HEAD  | api/refund/{refund}      | refund.show    | App\UI\Controllers\Refund\RefundController@show    | api        |
-|        | PUT|PATCH | api/refund/{refund}      | refund.update  | App\UI\Controllers\Refund\RefundController@update  | api        |
-|        | DELETE    | api/refund/{refund}      | refund.destroy | App\UI\Controllers\Refund\RefundController@destroy | api        |
-|        | GET|HEAD  | api/refund/{refund}/edit | refund.edit    | App\UI\Controllers\Refund\RefundController@edit    | api        |
-+--------+-----------+--------------------------+----------------+----------------------------------------------------+------------+
+
++--------+-----------+---------------------+----------------+----------------------------------------------------+------------+
+|   OK   | Method    | URI                 | Name           | Action                                             | Middleware |
++--------+-----------+---------------------+----------------+----------------------------------------------------+------------+
+|   XX   | GET|HEAD  | /                   |                | Closure                                            | web        |
+|   XX   | GET|HEAD  | api                 |                | Closure                                            | api        |
+|   XX   | GET|HEAD  | api/person          | person.index   | App\UI\Controllers\Person\PersonController@index   | api        |
+|   XX   | POST      | api/person          | person.store   | App\UI\Controllers\Person\PersonController@store   | api        |
+|   XX   | GET|HEAD  | api/person/{person} | person.show    | App\UI\Controllers\Person\PersonController@show    | api        |
+|   XX   | PUT|PATCH | api/person/{person} | person.update  | App\UI\Controllers\Person\PersonController@update  | api        |
+|   XX   | DELETE    | api/person/{person} | person.destroy | App\UI\Controllers\Person\PersonController@destroy | api        |
+|   XX   | GET|HEAD  | api/refund          | refund.index   | App\UI\Controllers\Refund\RefundController@index   | api        |
+|   XX   | POST      | api/refund/{person} | refund.store   | App\UI\Controllers\Refund\RefundController@store   | api        |
+|   XX   | GET|HEAD  | api/refund/{person} | refund.show    | App\UI\Controllers\Refund\RefundController@show    | api        |
+|   XX   | PUT|PATCH | api/refund/{refund} | refund.update  | App\UI\Controllers\Refund\RefundController@update  | api        |
+|   XX   | DELETE    | api/refund/{refund} | refund.destroy | App\UI\Controllers\Refund\RefundController@destroy | api        |
++--------+-----------+---------------------+----------------+----------------------------------------------------+------------+

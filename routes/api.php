@@ -22,9 +22,11 @@ Route::get('/', function () {
 });
 
 Route::namespace('Person')->group( function (){
-    Route::resource('person', 'PersonController');
+    Route::apiResource('person', 'PersonController');
 });
 
 Route::namespace('Refund')->group( function (){
-    Route::resource('refund', 'RefundController');
+    Route::get('refund/{person}','RefundController@show')->name('refund.show');
+    Route::post('refund/{person}','RefundController@store')->name('refund.store');
+    Route::apiResource('refund', 'RefundController')->except(['store','show']);
 });
