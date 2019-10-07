@@ -17,7 +17,7 @@ class RefundController extends Controller
     protected $personRepo;
     protected $refundRepo;
 
-    public function __construct(RefundRepository $refundRepository,PersonRepository $personRepository)
+    public function __construct(RefundRepository $refundRepository, PersonRepository $personRepository)
     {
         $this->refundRepo = $refundRepository;
         $this->personRepo = $personRepository;
@@ -111,10 +111,38 @@ class RefundController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-
         $report = $this->refundRepo->generateReport($request->all());
 
+        if ($request->has('csv')) {
+            if ($request->query('delimiter')) {
+                return self::getCSV($report, 'report.csv', $request->query('delimiter'));
+            }
+            return self::getCSV($report, 'report.csv');
+        }
+
         return response()->json($report, 200);
+    }
+
+    private static function getCSV($object, $fileName = 'export.csv', $delimiter = ';')
+    {
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=" . $fileName,
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $objArr = get_object_vars($object);
+
+        $callback = function () use ($delimiter, $objArr) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, array_keys($objArr), $delimiter);
+            fputcsv($file, array_values($objArr), $delimiter);
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
 
