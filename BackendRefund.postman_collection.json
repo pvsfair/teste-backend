@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "da0e977b-05a6-4120-bd9e-27fb4f2fc087",
+		"name": "BackendRefund",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "refund",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}refund?page=5",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": \"118.54\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}refund/00000000001",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"00000000001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alter",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 34\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}refund/5d9a09e9531d0000c1000110",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"5d9a09e9531d0000c1000110"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}refund/5d9a0dcb531d0000c1000111",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"5d9a0dcb531d0000c1000111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"month\": 9,\r\n  \"year\": 2019\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}refund/report",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"report"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "person",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}person",
+							"host": [
+								"{{base_url}}person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Joanoes Abc\",\r\n  \"identification\": \"00000000001\",\r\n  \"jobRole\": \"Não sei\",\r\n  \"date\": \"2019-09-12T09:33:20\",\r\n  \"refunds\": [\r\n    {\r\n      \"date\": \"2019-09-12T09:33:20-03:00\",\r\n      \"type\": \"TICKET\",\r\n      \"description\": \"Gastei com a passagem para João Pessoa\",\r\n      \"value\": 118.91\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}person",
+							"host": [
+								"{{base_url}}person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alter",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Joanoes Abcd\",\r\n  \"jobRole\": \"Não sei não\",\r\n  \"date\": \"2019-09-12T09:33:20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}person/5d990f0f531d0000c10000fb",
+							"host": [
+								"{{base_url}}person"
+							],
+							"path": [
+								"5d990f0f531d0000c10000fb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}person/5d990f0f531d0000c10000fb",
+							"host": [
+								"{{base_url}}person"
+							],
+							"path": [
+								"5d990f0f531d0000c10000fb"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
