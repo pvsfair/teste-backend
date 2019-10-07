@@ -2,8 +2,8 @@
 
 namespace App\UI\Controllers\Refund;
 
-use App\Domain\Repositories\IPersonRepository as PersonRepository;
-use App\Domain\Repositories\IRefundRepository as RefundRepository;
+use App\Domain\Interfaces\Repositories\IPersonRepository as PersonRepository;
+use App\Domain\Interfaces\Repositories\IRefundRepository as RefundRepository;
 use App\UI\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class RefundController extends Controller
         return $this->paginate($refunds, 10);
     }
 
-    public function paginate($items, $perPage = 15, $page = null, $options = [])
+    public function paginate($items, $perPage = 20, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);

@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\Domain\Repositories;
+namespace App\Domain\Interfaces\Repositories;
 
-use App\Domain\Repositories\IPersonRepository as Person;
+use App\Domain\Interfaces\Repositories\IPersonRepository as Person;
 
 
 interface IRefundRepository

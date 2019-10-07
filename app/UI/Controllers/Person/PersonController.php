@@ -2,10 +2,8 @@
 
 namespace App\UI\Controllers\Person;
 
-use App\Domain\Repositories\IPersonRepository;
-use App\Domain\Repositories\IPersonRepository as PersonRepository;
+use App\Domain\Interfaces\Repositories\IPersonRepository as PersonRepository;
 use App\UI\Controllers\Controller;
-use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

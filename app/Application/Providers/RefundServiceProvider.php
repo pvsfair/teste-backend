@@ -14,7 +14,7 @@ class RefundServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Domain\Repositories\IRefundRepository',
+            'App\Domain\Interfaces\Repositories\IRefundRepository',
             'App\Infrastructure\Repositories\RefundRepository'
         );
     }
@@ -22,7 +22,7 @@ class RefundServiceProvider extends ServiceProvider
     public function provides()
     {
         return[
-            'App\Domain\Repositories\IRefundRepository',
+            'App\Domain\Interfaces\Repositories\IRefundRepository',
             ];
     }
 

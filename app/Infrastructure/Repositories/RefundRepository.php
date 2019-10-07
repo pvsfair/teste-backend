@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Repositories;
 
-use App\Domain\Repositories\IPersonRepository as IPerson;
-use App\Domain\Repositories\IRefundRepository;
+use App\Domain\Interfaces\Repositories\IPersonRepository as IPerson;
+use App\Domain\Interfaces\Repositories\IRefundRepository;
 use App\Infrastructure\Repositories\PersonRepository as Person;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Mongodb\Eloquent\Model;

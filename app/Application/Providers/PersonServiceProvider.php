@@ -14,7 +14,7 @@ class PersonServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Domain\Repositories\IPersonRepository',
+            'App\Domain\Interfaces\Repositories\IPersonRepository',
             'App\Infrastructure\Repositories\PersonRepository'
         );
     }
@@ -22,7 +22,7 @@ class PersonServiceProvider extends ServiceProvider
     public function provides()
     {
         return[
-            'App\Domain\Repositories\IPersonRepository',
+            'App\Domain\Interfaces\Repositories\IPersonRepository',
         ];
     }
 

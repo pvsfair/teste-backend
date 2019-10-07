@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain\Repositories;
+namespace App\Domain\Interfaces\Repositories;
 
 
 interface IPersonRepository

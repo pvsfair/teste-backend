@@ -2,11 +2,10 @@
 
 namespace App\Infrastructure\Repositories;
 
-use App\Domain\Repositories\IPersonRepository;
-use App\Domain\Repositories\IRefundRepository;
+use App\Domain\Interfaces\Repositories\IPersonRepository;
+use App\Domain\Interfaces\Repositories\IRefundRepository;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
-use Jenssegers\Mongodb\Relations\EmbedsMany;
 
 class PersonRepository extends Model implements IPersonRepository
 {

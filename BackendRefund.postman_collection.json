@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "da0e977b-05a6-4120-bd9e-27fb4f2fc087",
 		"name": "BackendRefund",
+		"description": "Documentação da API para **teste-backend**",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -14,14 +15,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}refund?page=5",
+							"raw": "{{base_url}}refund/?page=1",
 							"host": [
 								"{{base_url}}refund"
+							],
+							"path": [
+								""
 							],
 							"query": [
 								{
 									"key": "page",
-									"value": "5"
+									"value": "1"
 								}
 							]
 						}
@@ -146,6 +150,53 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "report CSV",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"month\": 9,\r\n  \"year\": 2019\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}refund/report?csv",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"report"
+							],
+							"query": [
+								{
+									"key": "csv",
+									"value": ""
+								},
+								{
+									"key": "delimiter",
+									"value": ",",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -159,9 +210,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}person",
+							"raw": "{{base_url}}person/00000000001",
 							"host": [
 								"{{base_url}}person"
+							],
+							"path": [
+								"00000000001"
 							]
 						}
 					},
@@ -236,12 +290,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}person/5d990f0f531d0000c10000fb",
+							"raw": "{{base_url}}person/00000000001",
 							"host": [
 								"{{base_url}}person"
 							],
 							"path": [
-								"5d990f0f531d0000c10000fb"
+								"00000000001"
 							]
 						}
 					},
