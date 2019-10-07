@@ -2,103 +2,79 @@
 
 namespace App\UI\Controllers\Refund;
 
-use App\Domain\Interfaces\Repositories\IPersonRepository as PersonRepository;
-use App\Domain\Interfaces\Repositories\IRefundRepository as RefundRepository;
+use App\Domain\Interfaces\Repositories\IPersonRepository;
+use App\Domain\Interfaces\Repositories\IRefundRepository;
+use App\Domain\Interfaces\Services\IRefundService;
 use App\UI\Controllers\Controller;
-use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class RefundController extends Controller
 {
     protected $personRepo;
     protected $refundRepo;
 
-    public function __construct(RefundRepository $refundRepository, PersonRepository $personRepository)
+    protected $service;
+
+    public function __construct(IRefundService $refundService, IRefundRepository $refundRepository, IPersonRepository $personRepository)
     {
         $this->refundRepo = $refundRepository;
         $this->personRepo = $personRepository;
+
+        $this->service = $refundService;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $refunds = $this->refundRepo->getAll();
-        return $this->paginate($refunds, 10);
-    }
-
-    public function paginate($items, $perPage = 20, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        return $this->service->getAllRefunds();
     }
 
     public function show($id)
     {
-        $refund = $this->refundRepo->find($id);
-        if (!$refund) {
-            return response()->json([
-                'message' => 'Refund não encontrado',
-            ], 404);
+        try {
+            $refund = $this->service->getRefund($id);
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(["error" => $ex->getMessage()], 404);
         }
         return response()->json($refund, 200);
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request, $personId)
     {
-        $person = $this->personRepo->find($id, false);
-
-        if (!$person) {
-            return response()->json([
-                'message' => 'Person não encontrado',
-            ], 404);
+        try {
+            $person = $this->service->saveRefund($personId, $request->all());
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(["error" => $ex->getMessage()], 404);
+        } catch (ValidationException $ex) {
+            return response()->json($ex->validator->errors(), 400);
         }
-
-        $validator = Validator::make($request->all(), $this->refundRepo->getStoringValidationData());
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $this->refundRepo::storeRefundOn($person, $request->all());
-        $person->save();
         return response()->json($person, 201);
     }
 
     public function update(Request $request, $id)
     {
-        $refund = $this->refundRepo->find($id);
-        if (!$refund) {
-            return response()->json([
-                'message' => 'Refund não encontrado',
-            ], 404);
+        try {
+            $refundUpdated = $this->service->updateRefund($id, $request->only('value'));
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(["error" => $ex->getMessage()], 404);
+        } catch (ValidationException $ex) {
+            return response()->json($ex->validator->errors(), 400);
         }
-
-        $validator = Validator::make($request->all(), $this->refundRepo->getUpdatingValidationData());
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $refundUpdated = $this->refundRepo->updateRefund($refund, $request->only('value'));
-
         return response()->json($refundUpdated, 200);
     }
 
     public function destroy($id)
     {
-        $refund = $this->refundRepo->find($id);
-        if (!$refund) {
-            return response()->json([
-                'message' => 'Refund não encontrado',
-            ], 404);
+        try{
+            $this->service->deleteRefund($id);
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(["error" => $ex->getMessage()], 404);
         }
-
-        $this->refundRepo->removeRefund($refund);
-
         return response()->json([
             'message' => 'Refund ' . $id . ' removido com sucesso',
         ], 200);
@@ -106,12 +82,11 @@ class RefundController extends Controller
 
     public function report(Request $request)
     {
-        $validator = Validator::make($request->all(), $this->refundRepo->getReportValidationData());
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+        try{
+            $report = $this->service->generateReport($request->all());
+        } catch (ValidationException $ex) {
+            return response()->json($ex->validator->errors(), 400);
         }
-        $report = $this->refundRepo->generateReport($request->all());
 
         if ($request->has('csv')) {
             if ($request->query('delimiter')) {

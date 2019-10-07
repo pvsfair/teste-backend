@@ -28,8 +28,8 @@ class PersonController extends Controller
     {
         try {
             $person = $this->service->getPerson($id);
-        }catch (ModelNotFoundException $ex){
-            return response()->json(["error"=>$ex->getMessage()],404);
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(["error" => $ex->getMessage()], 404);
         }
         return response()->json($person);
     }
@@ -48,9 +48,9 @@ class PersonController extends Controller
     {
         try {
             $personUpdated = $this->service->updatePerson($id, $request->all());
-        }catch (ModelNotFoundException $ex){
-            return response()->json(["error"=>$ex->getMessage()],404);
-        }catch (ValidationException $ex){
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(["error" => $ex->getMessage()], 404);
+        } catch (ValidationException $ex) {
             return response()->json($ex->validator->errors(), 400);
         }
         return response()->json($personUpdated, 200);
@@ -58,10 +58,10 @@ class PersonController extends Controller
 
     public function destroy($id)
     {
-        try{
+        try {
             $this->service->deletePerson($id);
-        }catch (ModelNotFoundException $ex){
-            return response()->json(["error"=>$ex->getMessage()],404);
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(["error" => $ex->getMessage()], 404);
         }
 
         return response()->json([

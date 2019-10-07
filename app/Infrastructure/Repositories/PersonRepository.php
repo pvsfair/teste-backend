@@ -71,13 +71,6 @@ class PersonRepository extends Model implements IPersonRepository
     public function updatePerson($person, array $options)
     {
         $person->fill($options);
-//        echo $person;
-//        echo $person->refunds;
-
-//        foreach ($options['refunds'] as $refundOpt) {
-//            RefundRepository::storeRefundOn($person, $refundOpt);
-//        }
-
         $person->save();
         return $person;
     }
@@ -89,12 +82,10 @@ class PersonRepository extends Model implements IPersonRepository
 
     private function fixDatesEmbededObjects(PersonRepository $Person)
     {
-        $Person->refunds = $Person->refunds; //usado para converter as datas corretamente do banco, dentro de cada subobjeto da lista;
-        // sem a linha acima a data é formatada assim:
-        //                "date": {
-        //                    "$date": {
-        //                        "$numberLong": "1565613200000"
-        //                    }
-        //                },
+        foreach ($Person->refunds as $r){
+            if((isset($r->deleted_at) || !empty($r->deleted_at))){
+                $Person->refunds()->dissociate($r);
+            }
+        }
     }
 }

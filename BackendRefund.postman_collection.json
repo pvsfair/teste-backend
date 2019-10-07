@@ -33,6 +33,23 @@
 					"response": []
 				},
 				{
+					"name": "list ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}refund/5d9abafdab530000d400220e",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"5d9abafdab530000d400220e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "add",
 					"request": {
 						"method": "POST",
@@ -46,7 +63,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": \"118.54\"\r\n}",
+							"raw": "{\r\n  \"date\": \"2019-10-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 67.13\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,12 +71,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}refund/00000000001",
+							"raw": "{{base_url}}refund/00000000010",
 							"host": [
 								"{{base_url}}refund"
 							],
 							"path": [
-								"00000000001"
+								"00000000010"
 							]
 						}
 					},
@@ -79,7 +96,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 35\r\n}",
+							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 33\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,12 +104,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}refund/5d9a9b83ab530000d4002202",
+							"raw": "{{base_url}}refund/5d9abafdab530000d400220e",
 							"host": [
 								"{{base_url}}refund"
 							],
 							"path": [
-								"5d9a9b83ab530000d4002202"
+								"5d9abafdab530000d400220e"
 							]
 						}
 					},
@@ -104,12 +121,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}refund/5d9a0dcb531d0000c1000111",
+							"raw": "{{base_url}}refund/5d9abafdab530000d400220e",
 							"host": [
 								"{{base_url}}refund"
 							],
 							"path": [
-								"5d9a0dcb531d0000c1000111"
+								"5d9abafdab530000d400220e"
 							]
 						}
 					},
@@ -168,7 +185,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"month\": 9,\r\n  \"year\": 2019\r\n}",
+							"raw": "{\r\n  \"month\": 10,\r\n  \"year\": 2019\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -186,7 +203,7 @@
 							"query": [
 								{
 									"key": "csv",
-									"value": ""
+									"value": null
 								},
 								{
 									"key": "delimiter",
@@ -232,7 +249,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Joanoes Abc\",\r\n  \"identification\": \"00000000009\",\r\n  \"jobRole\": \"Não sei\",\r\n  \"date\": \"2019-09-12T09:33:20\",\r\n  \"refunds\": [\r\n    {\r\n      \"date\": \"2019-09-12T09:33:20-03:00\",\r\n      \"type\": \"TICKET\",\r\n      \"description\": \"Gastei com a passagem para João Pessoa\",\r\n      \"value\": 118.91\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"name\": \"Joanoes Abc\",\r\n  \"identification\": \"00000000011\",\r\n  \"jobRole\": \"Não sei\",\r\n  \"date\": \"2019-09-12T09:33:20\",\r\n  \"refunds\": [\r\n    {\r\n      \"date\": \"2019-09-12T09:33:20-03:00\",\r\n      \"type\": \"TICKET\",\r\n      \"description\": \"Gastei com a passagem para João Pessoa\",\r\n      \"value\": 118.91\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -270,12 +287,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}person/00000000009",
+							"raw": "{{base_url}}person/00000000011",
 							"host": [
 								"{{base_url}}person"
 							],
 							"path": [
-								"00000000009"
+								"00000000011"
 							]
 						}
 					},
@@ -287,12 +304,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}person/00000000001",
+							"raw": "{{base_url}}person/00000000011",
 							"host": [
 								"{{base_url}}person"
 							],
 							"path": [
-								"00000000001"
+								"00000000011"
 							]
 						}
 					},
