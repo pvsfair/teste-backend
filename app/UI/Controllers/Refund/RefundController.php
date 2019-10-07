@@ -2,6 +2,7 @@
 
 namespace App\UI\Controllers\Refund;
 
+use App\Application\Exceptions\UpdateApprovedRefundException;
 use App\Domain\Interfaces\Repositories\IPersonRepository;
 use App\Domain\Interfaces\Repositories\IRefundRepository;
 use App\Domain\Interfaces\Services\IRefundService;
@@ -64,6 +65,8 @@ class RefundController extends Controller
             return response()->json(["error" => $ex->getMessage()], 404);
         } catch (ValidationException $ex) {
             return response()->json($ex->validator->errors(), 400);
+        } catch (UpdateApprovedRefundException $ex){
+            return response()->json(["error" => $ex->getMessage()], 403);
         }
         return response()->json($refundUpdated, 200);
     }
@@ -93,6 +96,16 @@ class RefundController extends Controller
                 return self::getCSV($report, 'report.csv', $request->query('delimiter'));
             }
             return self::getCSV($report, 'report.csv');
+        }
+
+        return response()->json($report, 200);
+    }
+
+    public function approve($id){
+        try{
+            $report = $this->service->approveRefund($id);
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(["error" => $ex->getMessage()], 404);
         }
 
         return response()->json($report, 200);

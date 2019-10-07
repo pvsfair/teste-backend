@@ -18,6 +18,8 @@ interface IRefundService
 
     public function generateReport(array $data);
 
+    public function approveRefund($id);
+
     public function getStoringValidationData(): array;
 
     public function getUpdatingValidationData(): array;

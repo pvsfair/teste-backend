@@ -4,6 +4,7 @@
 namespace App\Domain\Services;
 
 
+use App\Application\Exceptions\UpdateApprovedRefundException;
 use App\Domain\Interfaces\Repositories\IPersonRepository;
 use App\Domain\Interfaces\Repositories\IRefundRepository;
 use App\Domain\Interfaces\Services\IRefundService;
@@ -56,6 +57,9 @@ class RefundService implements IRefundService
     {
         $refund = $this->getRefund($refundId);
         $this->validateData($data, $this->getUpdatingValidationData());
+        if($this->repository->isBlocked($refund)){
+            throw new UpdateApprovedRefundException();
+        }
         return $this->repository->updateRefund($refund, $data);
     }
 
@@ -68,6 +72,13 @@ class RefundService implements IRefundService
     public function generateReport(array $data){
         $this->validateData($data, $this->getReportValidationData());
         return $this->repository->generateReport($data);
+    }
+
+    public function approveRefund($id)
+    {
+        $refund = $this->getRefund($id);
+        $this->repository->blockRefund($refund);
+        return $refund;
     }
 
     public function getStoringValidationData(): array

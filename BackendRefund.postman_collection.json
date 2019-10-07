@@ -38,97 +38,33 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}refund/5d9abafdab530000d400220e",
+							"raw": "{{base_url}}refund/5d9907e5531d0000c10000f5",
 							"host": [
 								"{{base_url}}refund"
 							],
 							"path": [
-								"5d9abafdab530000d400220e"
+								"5d9907e5531d0000c10000f5"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "add",
+					"name": "approve",
 					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"date\": \"2019-10-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 67.13\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}refund/00000000010",
-							"host": [
-								"{{base_url}}refund"
-							],
-							"path": [
-								"00000000010"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "alter",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 33\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}refund/5d9abafdab530000d400220e",
-							"host": [
-								"{{base_url}}refund"
-							],
-							"path": [
-								"5d9abafdab530000d400220e"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "remove",
-					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}refund/5d9abafdab530000d400220e",
+							"raw": "{{base_url}}refund/approve/5d9907e5531d0000c10000f5",
 							"host": [
 								"{{base_url}}refund"
 							],
 							"path": [
-								"5d9abafdab530000d400220e"
+								"approve",
+								"5d9907e5531d0000c10000f5"
 							]
-						}
+						},
+						"description": "Aprovar reembolso para bloquear edição"
 					},
 					"response": []
 				},
@@ -210,6 +146,89 @@
 									"value": ",",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"date\": \"2019-10-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 67.13\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}refund/00000000010",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"00000000010"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alter",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 35\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}refund/5d9907e5531d0000c10000f5",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"5d9907e5531d0000c10000f5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}refund/5d9abafdab530000d400220e",
+							"host": [
+								"{{base_url}}refund"
+							],
+							"path": [
+								"5d9abafdab530000d400220e"
 							]
 						}
 					},

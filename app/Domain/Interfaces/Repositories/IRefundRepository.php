@@ -21,6 +21,10 @@ interface IRefundRepository
 
     public function generateReport(array $all);
 
+    public function blockRefund($refund);
+
+    public function isBlocked($refund);
+
     public function getStoringValidationData(): array;
 
     public function getUpdatingValidationData(): array;

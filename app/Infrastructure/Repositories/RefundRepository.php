@@ -19,7 +19,7 @@ class RefundRepository extends Model implements IRefundRepository
 
     protected $fillable = ['type', 'description', 'value', 'date'];
 
-    protected $dates = ['date', 'created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['date', 'approved_at', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $dateFormat = 'Y-m-d\TH:i:sP';
 
@@ -108,6 +108,17 @@ class RefundRepository extends Model implements IRefundRepository
         $return->totalRefunds = round($return->totalRefunds, 2);
 
         return $return;
+    }
+
+    public function blockRefund($refund)
+    {
+        $refund->approved_at = date($this->dateFormat);
+        $refund->save();
+    }
+
+    public function isBlocked($refund)
+    {
+        return isset($refund->approved_at) || !empty($refund->approved_at);
     }
 
     public function getStoringValidationData(): array
