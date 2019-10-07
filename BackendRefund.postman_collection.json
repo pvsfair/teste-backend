@@ -79,7 +79,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 34\r\n}",
+							"raw": "{\r\n  \"date\": \"2019-09-12T09:33:20-03:00\",\r\n  \"type\": \"TICKET\",\r\n  \"description\": \"Gastei com a passagem para João Pessoa\",\r\n  \"value\": 35\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,12 +87,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}refund/5d9a09e9531d0000c1000110",
+							"raw": "{{base_url}}refund/5d9a9b83ab530000d4002202",
 							"host": [
 								"{{base_url}}refund"
 							],
 							"path": [
-								"5d9a09e9531d0000c1000110"
+								"5d9a9b83ab530000d4002202"
 							]
 						}
 					},
@@ -210,12 +210,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}person/00000000001",
+							"raw": "{{base_url}}person",
 							"host": [
 								"{{base_url}}person"
-							],
-							"path": [
-								"00000000001"
 							]
 						}
 					},
@@ -235,7 +232,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Joanoes Abc\",\r\n  \"identification\": \"00000000001\",\r\n  \"jobRole\": \"Não sei\",\r\n  \"date\": \"2019-09-12T09:33:20\",\r\n  \"refunds\": [\r\n    {\r\n      \"date\": \"2019-09-12T09:33:20-03:00\",\r\n      \"type\": \"TICKET\",\r\n      \"description\": \"Gastei com a passagem para João Pessoa\",\r\n      \"value\": 118.91\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"name\": \"Joanoes Abc\",\r\n  \"identification\": \"00000000009\",\r\n  \"jobRole\": \"Não sei\",\r\n  \"date\": \"2019-09-12T09:33:20\",\r\n  \"refunds\": [\r\n    {\r\n      \"date\": \"2019-09-12T09:33:20-03:00\",\r\n      \"type\": \"TICKET\",\r\n      \"description\": \"Gastei com a passagem para João Pessoa\",\r\n      \"value\": 118.91\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,12 +270,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}person/5d990f0f531d0000c10000fb",
+							"raw": "{{base_url}}person/00000000009",
 							"host": [
 								"{{base_url}}person"
 							],
 							"path": [
-								"5d990f0f531d0000c10000fb"
+								"00000000009"
 							]
 						}
 					},

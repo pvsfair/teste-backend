@@ -12,21 +12,21 @@ use Illuminate\Validation\ValidationException;
 
 class PersonService implements IPersonService
 {
-    private $personRepo;
+    private $repository;
 
     public function __construct(IPersonRepository $personRepo)
     {
-        $this->personRepo = $personRepo;
+        $this->repository = $personRepo;
     }
 
     public function getAllPersons()
     {
-        return $this->personRepo->getAll();
+        return $this->repository->getAll();
     }
 
     public function getPerson($id)
     {
-        $person = $this->personRepo->find($id);
+        $person = $this->repository->find($id);
         if(!$person){
             throw new ModelNotFoundException("Person não encontrado");
         }
@@ -37,7 +37,7 @@ class PersonService implements IPersonService
     {
         $this->validateData($data);
 
-        return $this->personRepo->storePerson($data);
+        return $this->repository->storePerson($data);
     }
 
     public function updatePerson($personId, array $data)
@@ -46,14 +46,14 @@ class PersonService implements IPersonService
 
         $this->validateData($data, false);
 
-        return $this->personRepo->updatePerson($person, $data);
+        return $this->repository->updatePerson($person, $data);
     }
 
     public function deletePerson($personId)
     {
         $person = $this->getPerson($personId);
 
-        return $this->personRepo->removePerson($person);
+        return $this->repository->removePerson($person);
     }
 
     protected function validateData(array $data, $isStore = true)

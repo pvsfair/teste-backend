@@ -12,12 +12,10 @@ use Illuminate\Validation\ValidationException;
 
 class PersonController extends Controller
 {
-    protected $personRepo;
     protected $service;
 
-    public function __construct(IPersonRepository $personRepository, IPersonService $personService)
+    public function __construct(IPersonService $personService)
     {
-        $this->personRepo = $personRepository;
         $this->service = $personService;
     }
 
