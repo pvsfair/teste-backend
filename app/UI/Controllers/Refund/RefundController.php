@@ -106,11 +106,11 @@ class RefundController extends Controller
 
     public function report(Request $request)
     {
-//        $validator = Validator::make($request->all(), $this->refundRepo->getReportValidationData());
-//
-//        if ($validator->fails()) {
-//            return response()->json($validator->errors(), 400);
-//        }
+        $validator = Validator::make($request->all(), $this->refundRepo->getReportValidationData());
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
 
         $report = $this->refundRepo->generateReport($request->all());
 
