@@ -21,10 +21,24 @@ class PersonRepository extends Model implements IPersonRepository
 
     protected $refundRepo;
 
+    public function refunds()
+    {
+        return $this->embedsMany('App\Infrastructure\Repositories\RefundRepository');
+    }
+
     public function __construct(array $attributes = [], IRefundRepository $refundRepo = null)
     {
         $this->refundRepo = $refundRepo;
         parent::__construct($attributes);
+    }
+
+    public function getAll()
+    {
+        $allPersons = $this::paginate(10);
+        foreach ($allPersons->items() as $person) {
+            $this->fixDatesEmbededObjects($person);
+        }
+        return $allPersons;
     }
 
     public function find($identification, $fixToShow = true)
@@ -38,20 +52,6 @@ class PersonRepository extends Model implements IPersonRepository
             $this->fixDatesEmbededObjects($person);
         }
         return $person;
-    }
-
-    public function refunds()
-    {
-        return $this->embedsMany('App\Infrastructure\Repositories\RefundRepository');
-    }
-
-    public function getAll()
-    {
-        $allPersons = $this::paginate(10);
-        foreach ($allPersons->items() as $person) {
-            $this->fixDatesEmbededObjects($person);
-        }
-        return $allPersons;
     }
 
     public function storePerson(array $options)
@@ -96,20 +96,5 @@ class PersonRepository extends Model implements IPersonRepository
         //                        "$numberLong": "1565613200000"
         //                    }
         //                },
-    }
-
-    public function getStoringValidationData(): array
-    {
-        return ['name' => 'required|string',
-            'identification' => 'required|string|unique:persons|max:11',
-            'jobRole' => 'required|string',
-            'refunds' => 'array|nullable'];
-    }
-
-    public function getUpdatingValidationData(): array
-    {
-        return ['name' => 'filled',
-            'identification' => 'filled|unique:persons|max:11',
-            'jobRole' => 'filled'];
     }
 }

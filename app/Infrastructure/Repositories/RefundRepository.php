@@ -2,9 +2,9 @@
 
 namespace App\Infrastructure\Repositories;
 
-use App\Domain\Interfaces\Repositories\IPersonRepository as IPerson;
+use App\Domain\Interfaces\Repositories\IPersonRepository as IPersonModel;
 use App\Domain\Interfaces\Repositories\IRefundRepository;
-use App\Infrastructure\Repositories\PersonRepository as Person;
+use App\Infrastructure\Repositories\PersonRepository as PersonModel;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
@@ -48,7 +48,7 @@ class RefundRepository extends Model implements IRefundRepository
 
     public function getAll()
     {
-        $refunds = Person::all()->pluck('refunds');
+        $refunds = PersonModel::all()->pluck('refunds');
         $allRefunds = collect();
         foreach ($refunds as $refund) {
             $toSplice = array();
@@ -62,7 +62,7 @@ class RefundRepository extends Model implements IRefundRepository
         return $allRefunds->all();
     }
 
-    public static function storeRefundOn(IPerson $person, array $refundOpt)
+    public static function storeRefundOn(IPersonModel $person, array $refundOpt)
     {
         $refund = new RefundRepository();
         $refund->fill($refundOpt);

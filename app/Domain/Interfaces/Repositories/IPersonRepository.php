@@ -17,8 +17,4 @@ interface IPersonRepository
     public function updatePerson($person, array $all);
 
     public function removePerson($person);
-
-    public function getStoringValidationData(): array;
-
-    public function getUpdatingValidationData(): array;
 }

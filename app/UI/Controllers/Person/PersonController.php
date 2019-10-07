@@ -2,80 +2,70 @@
 
 namespace App\UI\Controllers\Person;
 
-use App\Domain\Interfaces\Repositories\IPersonRepository as PersonRepository;
+use App\Domain\Interfaces\Repositories\IPersonRepository;
+use App\Domain\Interfaces\Services\IPersonService;
 use App\UI\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PersonController extends Controller
 {
     protected $personRepo;
+    protected $service;
 
-    public function __construct(PersonRepository $personRepository)
+    public function __construct(IPersonRepository $personRepository, IPersonService $personService)
     {
         $this->personRepo = $personRepository;
+        $this->service = $personService;
     }
 
     public function index()
     {
-        return $this->personRepo->getAll();
+        return $this->service->getAllPersons();
     }
 
     public function show($id)
     {
-        $person = $this->personRepo->find($id);
-        if (!$person) {
-            return response()->json([
-                'message' => 'Person não encontrado',
-            ], 404);
+        try {
+            $person = $this->service->getPerson($id);
+        }catch (ModelNotFoundException $ex){
+            return response()->json(["error"=>$ex->getMessage()],404);
         }
-        return $person;
+        return response()->json($person);
     }
 
     public function store(Request $request)
     {
-        //move to service
-        $validator = Validator::make($request->all(), $this->personRepo->getStoringValidationData());
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+        try {
+            $personStored = $this->service->savePerson($request->all());
+        } catch (ValidationException $ex) {
+            return response()->json($ex->validator->errors(), 400);
         }
-
-        $personStored = $this->personRepo->storePerson($request->all());
-
         return response()->json($personStored, 201);
     }
 
     public function update(Request $request, $id)
     {
-        $person = $this->personRepo->find($id, false);
-        if (!$person) {
-            return response()->json([
-                'message' => 'Person não encontrado',
-            ], 404);
+        try {
+            $personUpdated = $this->service->updatePerson($id, $request->all());
+        }catch (ModelNotFoundException $ex){
+            return response()->json(["error"=>$ex->getMessage()],404);
+        }catch (ValidationException $ex){
+            return response()->json($ex->validator->errors(), 400);
         }
-        //move to service
-        $validator = Validator::make($request->all(), $this->personRepo->getUpdatingValidationData());
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $personUpdated = $this->personRepo->updatePerson($person, $request->all());
-
         return response()->json($personUpdated, 200);
     }
 
     public function destroy($id)
     {
-        $person = $this->personRepo->find($id, false);
-        if (!$person) {
-            return response()->json([
-                'message' => 'Person não encontrado',
-            ], 404);
+        try{
+            $this->service->deletePerson($id);
+        }catch (ModelNotFoundException $ex){
+            return response()->json(["error"=>$ex->getMessage()],404);
         }
 
-        $this->personRepo->removePerson($person);
         return response()->json([
             'message' => 'Person ' . $id . ' removido com sucesso',
         ], 200);
