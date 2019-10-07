@@ -17,12 +17,17 @@ class PersonServiceProvider extends ServiceProvider
             'App\Domain\Interfaces\Repositories\IPersonRepository',
             'App\Infrastructure\Repositories\PersonRepository'
         );
+        $this->app->bind(
+            'App\Domain\Interfaces\Services\IPersonService',
+            'App\Domain\Services\PersonService'
+        );
     }
 
     public function provides()
     {
         return[
             'App\Domain\Interfaces\Repositories\IPersonRepository',
+            'App\Domain\Interfaces\Services\IPersonService',
         ];
     }
 

@@ -17,12 +17,17 @@ class RefundServiceProvider extends ServiceProvider
             'App\Domain\Interfaces\Repositories\IRefundRepository',
             'App\Infrastructure\Repositories\RefundRepository'
         );
+        $this->app->bind(
+            'App\Domain\Interfaces\Services\IRefundService',
+            'App\Domain\Services\RefundService'
+        );
     }
 
     public function provides()
     {
         return[
             'App\Domain\Interfaces\Repositories\IRefundRepository',
+            'App\Domain\Interfaces\Services\IRefundService',
             ];
     }
 
