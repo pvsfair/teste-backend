@@ -65,7 +65,7 @@ class PersonRepository extends Model implements IPersonRepository
         }
 
         $person->save();
-        return response()->json($person, 201);
+        return $person;
     }
 
     public function updatePerson($person, array $options)
@@ -79,7 +79,7 @@ class PersonRepository extends Model implements IPersonRepository
 //        }
 
         $person->save();
-        return response()->json($person, 200);
+        return $person;
     }
 
     public function removePerson($person)

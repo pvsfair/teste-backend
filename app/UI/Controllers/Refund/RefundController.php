@@ -83,9 +83,9 @@ class RefundController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $this->refundRepo->updateRefund($refund, $request->only('value'));
+        $refundUpdated = $this->refundRepo->updateRefund($refund, $request->only('value'));
 
-        return response()->json($refund, 200);
+        return response()->json($refundUpdated, 200);
     }
 
     public function destroy($id)

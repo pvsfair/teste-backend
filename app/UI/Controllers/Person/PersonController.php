@@ -41,7 +41,9 @@ class PersonController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        return $this->personRepo->storePerson($request->all());
+        $personStored = $this->personRepo->storePerson($request->all());
+
+        return response()->json($personStored, 201);
     }
 
     public function update(Request $request, $id)
@@ -59,7 +61,9 @@ class PersonController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        return $this->personRepo->updatePerson($person, $request->all());
+        $personUpdated = $this->personRepo->updatePerson($person, $request->all());
+
+        return response()->json($personUpdated, 200);
     }
 
     public function destroy($id)

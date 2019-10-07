@@ -76,6 +76,8 @@ class RefundRepository extends Model implements IRefundRepository
     {
         $refund->fill($options);
         $refund->save();
+
+        return $refund;
     }
 
     public function removeRefund($refund)
